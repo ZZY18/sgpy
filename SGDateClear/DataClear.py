@@ -90,7 +90,7 @@ class DataClear(object):
         self.__GetData()
         Del_col=self.__Clear(0.1,0.5)
         print(Del_col)
-        self.range=self.__RangeDeal(1.5,f=0.1)
+        self.__RangeDeal(1.5,f=0.1)
         self.__AbnormalDeal()
         
 
@@ -98,4 +98,6 @@ class DataClear(object):
 if __name__=='__main__':
     import pandas as pd
     a=DataClear()
+    
     a.main()
+    print(a.DataRange)
