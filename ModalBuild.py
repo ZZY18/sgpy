@@ -1,3 +1,5 @@
+
+
 class ModalBuilder(object):
 
     def __init__(self, *args, **kwargs):
@@ -10,11 +12,29 @@ class ModalBuilder(object):
         """
         pass
     
-    def __SVMPipe(self):
+    def __SVMPipe(self,params):
         """
         建立一个SVM通道模型
         """
-        pass
+        from sklearn.preprocessing import StandardScaler
+        from sklearn.decomposition import PCA  
+        from sklearn.svm import SVR
+        from sklearn.pipeline import Pipeline      
+        from sklearn.model_selection import train_test_split,cross_val_score
+        pipe=[]
+        #解析标准化
+        if self.BuildInfo['scaler']=='StandardScaler':
+            pipe.append(('sc',StandardScaler()))
+            
+        #解析降维数据
+        if self.BuildInfo['Dimension']['algorithm']=='PCA':
+            pipe.append(('dr',PCA(n_components=self.BuildInfo['Dimension']['n_components'])))
+            
+        #解析算法
+        # if self.BuildInfo['Regression']['algorithm']=='SVR':
+        pipe.append(('svr',SVR(**params)))
+        self.pipe=Pipeline(pipe)
+
     
     def __SpaceBuild(self):
         """
